@@ -3,7 +3,7 @@ import './style.css';
 import './flags.css';
 
 import { createApp } from 'vue';
-import { createMemoryHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 import DialogService from 'primevue/dialogservice';
@@ -14,12 +14,14 @@ import AppState from './plugins/appState.js';
 import ThemeSwitcher from './components/ThemeSwitcher.vue';
 import Noir from './presets/Noir.js';
 
+import HomePage from './components/HomePage.vue';
 import TextAutofocus from './components/TextAutofocus.vue';
 import TextManualfocus from './components/TextManualfocus.vue';
 import SearchAutofocus from './components/SearchAutofocus.vue';
 import SearchManualfocus from './components/SearchManualfocus.vue';
 
 const routes = [
+  { path: '/', component: HomePage },
   { path: '/text-autofocus', component: TextAutofocus },
   { path: '/text-manualfocus', component: TextManualfocus },
   { path: '/search-autofocus', component: SearchAutofocus },
@@ -27,12 +29,13 @@ const routes = [
 ];
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
 
 const app = createApp(App);
 
+app.use(router);
 app.use(PrimeVue, {
   theme: {
     preset: Noir,
@@ -47,7 +50,6 @@ app.use(AppState);
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);
-app.use(router);
 
 app.component('ThemeSwitcher', ThemeSwitcher);
 

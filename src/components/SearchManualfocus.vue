@@ -1,7 +1,39 @@
+<script setup>
+import { ref } from "vue";
+import Drawer from "primevue/drawer";
+import InputText from "primevue/inputtext";
+
+const visible4 = ref(false);
+const value4 = ref("");
+const inputRef = ref();
+
+const onDrawerShown = () => {
+  inputRef.value?.$el?.focus();
+};
+</script>
 <template>
-  <Drawer v-model:visible="visible" header="TextAutofocus">
-    <div class="card flex justify-center flex-col gap-4">
-      <InputText v-model="value4" type="search" placeholder="Manual focus" />
+  <h1>Search Manual Focus</h1>
+  <Button label="Open Drawer" @click="visible4 = true" />
+  <div class="card flex justify-center">
+    <InputText
+      v-model="value4"
+      ref="inputRef"
+      type="search"
+      placeholder="Manual focus"
+    />
+  </div>
+  <Drawer
+    v-model:visible="visible4"
+    header="SearchManualfocus"
+    @after-show="onDrawerShown"
+  >
+    <div class="card flex justify-center">
+      <InputText
+        v-model="value4"
+        ref="inputRef"
+        type="search"
+        placeholder="Manual focus"
+      />
     </div>
   </Drawer>
 </template>

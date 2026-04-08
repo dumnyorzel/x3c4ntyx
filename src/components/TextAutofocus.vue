@@ -1,6 +1,24 @@
+<script setup>
+import { ref } from "vue";
+import Drawer from "primevue/drawer";
+import InputText from "primevue/inputtext";
+
+const visible1 = ref(false);
+const value1 = ref("");
+</script>
 <template>
-  <Drawer v-model:visible="visible" header="TextAutofocus">
-    <div class="card flex justify-center flex-col gap-4">
+  <h1>Text Autofocus</h1>
+  <Button label="Open Drawer" @click="visible1 = true" />
+  <div class="card flex justify-center">
+    <InputText
+      v-model="value1"
+      type="text"
+      placeholder="Autofocus"
+      :autofocus="true"
+    />
+  </div>
+  <Drawer v-model:visible="visible1" header="TextAutofocus">
+    <div class="card flex justify-center">
       <InputText
         v-model="value1"
         type="text"
