@@ -1,7 +1,6 @@
 <script setup>
-import SerachCursor from "./SerachCursor.vue";
+import SearchBar from "./SearchBar.vue";
 </script>
 <template>
-  Start page
-  <SerachCursor />
+  <SearchBar />
 </template>

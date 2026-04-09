@@ -15,6 +15,7 @@ import ThemeSwitcher from './components/ThemeSwitcher.vue';
 import Noir from './presets/Noir.js';
 
 import HomePage from './components/HomePage.vue';
+import SearchResultPage from './components/SearchResultPage.vue';
 import TextAutofocus from './components/TextAutofocus.vue';
 import TextManualfocus from './components/TextManualfocus.vue';
 import SearchAutofocus from './components/SearchAutofocus.vue';
@@ -22,6 +23,7 @@ import SearchManualfocus from './components/SearchManualfocus.vue';
 
 const routes = [
   { path: '/', component: HomePage },
+  { path: '/search', component: SearchResultPage },
   { path: '/text-autofocus', component: TextAutofocus },
   { path: '/text-manualfocus', component: TextManualfocus },
   { path: '/search-autofocus', component: SearchAutofocus },
