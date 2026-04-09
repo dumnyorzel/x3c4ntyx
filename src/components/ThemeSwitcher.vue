@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-between p-2 mb-4">
-    <nav class="flex items-center gap-4">
+    <nav class="flex flex-wrap items-center gap-4">
       <router-link to="/">Home</router-link>
       <router-link to="/text-autofocus">TextAutofocus </router-link>
       <router-link to="/text-manualfocus">TextManualfocus </router-link>
