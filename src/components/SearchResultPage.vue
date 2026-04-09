@@ -26,34 +26,49 @@ const router = useRouter();
 const searchQuery = ref(route.query.q as string ?? '');
 const results = ref<SearchResult[]>([]);
 const isLoading = ref(false);
+const inputRef = ref<InstanceType<typeof InputText> | null>(null);
+
+const getInputEl = (): HTMLInputElement | null =>
+  ((inputRef.value as any)?.$el ?? inputRef.value) as HTMLInputElement | null;
 
 const handleSearch = async (): Promise<void> => {
   if (!searchQuery.value.trim()) return;
-  router.replace({path: '/search', query: {q: searchQuery.value}})
+  router.replace({path: '/search', query: {q: searchQuery.value}});
+
+  const el = getInputEl();
+  const start = el?.selectionStart ?? null;
+  const end = el?.selectionEnd ?? null;
+
   isLoading.value = true;
   results.value = [];
   results.value = await fakeSearch(searchQuery.value);
   isLoading.value = false;
-  // ↑ Bug is reproducible here: cursor jumps to beginning after results load
+
+  // Safari resets the cursor whenever Vue re-assigns the input's value binding
+  // after a reactive update. Restore the saved position after the DOM settles.
+  await nextTick();
+  if (el && start !== null && end !== null) {
+    el.setSelectionRange(start, end);
+  }
 };
+
 onMounted(async () => {
   if (searchQuery.value) {
-    isLoading.value = true
-    results.value = await fakeSearch(searchQuery.value)
-    isLoading.value = false
-
+    isLoading.value = true;
+    results.value = await fakeSearch(searchQuery.value);
+    isLoading.value = false;
   }
-})
+});
 </script>
 
 <template>
     <h1>Search results</h1>
     <form @submit.prevent="handleSearch" class="flex gap-2">
       <InputText
-        type="search"
+        ref="inputRef"
+        type="text"
         v-model="searchQuery"
         placeholder="Type something…"
-        :autofocus="true"
         class="w-full flex-1 p-3"
       />
       <Button type="submit" :disabled="isLoading">
@@ -78,4 +93,3 @@ onMounted(async () => {
       </li>
     </ul>
 </template>
-
