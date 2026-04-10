@@ -2,5 +2,5 @@
 import SearchBar from "./SearchBar.vue";
 </script>
 <template>
-  <SearchBar />
+    <SearchBar />
 </template>

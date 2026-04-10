@@ -18,8 +18,8 @@ const value3 = ref("");
       :autofocus="true"
     />
   </div>
-  <Drawer v-model:visible="visible3" header="SearchAutofocus">
-    <div class="card flex justify-center">
+  <Drawer v-model:visible="visible3" header="SearchAutofocus" position="top">
+    <div class="card">
       <InputText
         v-model="value3"
         type="search"

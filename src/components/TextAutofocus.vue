@@ -17,8 +17,8 @@ const value1 = ref("");
       :autofocus="true"
     />
   </div>
-  <Drawer v-model:visible="visible1" header="TextAutofocus">
-    <div class="card flex justify-center">
+  <Drawer v-model:visible="visible1" header="TextAutofocus" position="top">
+    <div class="card flex">
       <InputText
         v-model="value1"
         type="text"

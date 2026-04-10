@@ -25,9 +25,10 @@ const onDrawerShown = () => {
   <Drawer
     v-model:visible="visible4"
     header="SearchManualfocus"
+    position="top"
     @after-show="onDrawerShown"
   >
-    <div class="card flex justify-center">
+    <div class="card flex">
       <InputText
         v-model="value4"
         ref="inputRef"

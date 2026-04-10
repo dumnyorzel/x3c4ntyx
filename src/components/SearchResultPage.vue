@@ -12,6 +12,8 @@ const FAKE_RESULTS: SearchResult[] = [
   { title: 'Understanding type="search"', description: 'How the search input type differs from text in WebKit browsers.', url: '#' },
 ];
 
+const inputRef = ref();
+
 const fakeSearch = (q: string): Promise<SearchResult[]> =>
   new Promise((resolve) =>
     setTimeout(
@@ -41,6 +43,7 @@ onMounted(async () => {
     isLoading.value = true
     results.value = await fakeSearch(searchQuery.value)
     isLoading.value = false
+    inputRef.value?.$el?.focus();
 
   }
 })
@@ -50,10 +53,10 @@ onMounted(async () => {
     <h1>Search results</h1>
     <form @submit.prevent="handleSearch" class="flex gap-2">
       <InputText
-        type="search"
+        type="text"
         v-model="searchQuery"
         placeholder="Type something…"
-        :autofocus="true"
+        ref="inputRef"
         class="w-full flex-1 p-3"
       />
       <Button type="submit" :disabled="isLoading">

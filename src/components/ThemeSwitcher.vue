@@ -1,5 +1,7 @@
 <template>
-  <div class="card flex justify-between p-2 mb-4">
+  <!-- <nav class="sticky z-[9999] overflow-hidden top-0 w-full h-16"></nav>
+  <main> -->
+  <div class="card sticky top-0 h-32 flex justify-between p-2 mb-4">
     <nav class="flex flex-wrap items-center gap-4">
       <router-link to="/">Home</router-link>
       <router-link to="/text-autofocus">TextAutofocus </router-link>
